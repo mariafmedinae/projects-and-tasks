@@ -1,0 +1,35 @@
+<div class="d-flex mb-4">
+  <!-- Back to projects list button -->
+  <app-button label="Regresar" (click)="goBack()"></app-button>
+</div>
+
+<h1 class="text-center">Nueva tarea</h1>
+
+<!-- New task form -->
+<form [formGroup]="formGroup" autocomplete="off">
+  <!-- Name input -->
+  <app-input
+    label="Tarea"
+    type="text"
+    [clearInput]="clearInput"
+    (onChange)="updateInputs('title', $event)"
+  ></app-input>
+
+  <!-- Completed checbox -->
+  <app-checkbox label="Tarea compledata" [clearInput]="clearInput" (onChange)="updateInputs('completed', $event)"></app-checkbox>
+
+  <!-- Alert message -->
+  @if (showAlert) {
+  <app-alert-message
+    [color]="alertClass"
+    [message]="alertText"
+  ></app-alert-message>
+  }
+
+  <!-- Save button -->
+  <app-button
+    [label]="getButtonLabel()"
+    [isLoading]="isLoading"
+    (onClick)="saveTask()"
+  ></app-button>
+</form>

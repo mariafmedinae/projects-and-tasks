@@ -1,0 +1,53 @@
+@if (loadingProjects) {
+<!-- Loader to api projects -->
+<app-loader></app-loader>
+} 
+@if (errorProjects) {
+<!-- Api load error message -->
+<app-alert-message
+  color="alert-danger"
+  message="Se presentó un error al cargar los proyectos. Vuelva a intentarlo"
+></app-alert-message>
+} 
+<!-- View content after api load -->
+@if (!errorProjects && !loadingProjects) { 
+  @if (!isCreateProject && !isViewTasks) {
+    <div
+      class="d-flex flex-column flex-sm-row justify-content-center align-items-center justify-content-sm-between mb-4"
+    >
+      <h1>Lista de proyectos</h1>
+
+      <!-- Add project button -->
+      <app-button label="Agregar proyecto" (onClick)="addProject()"></app-button>
+    </div>
+
+    @if (deleteAlert) {
+      <!-- Api load error message -->
+      <app-alert-message
+        [color]="alertClass"
+        [message]="alertText"
+      ></app-alert-message>
+    } 
+
+    @if (projects.length > 0) {
+      <app-table
+        [names]="tableNames"
+        [data]="projects"
+        (action)="tableActions($event)"
+        [updateTable]="updateTable"
+      ></app-table>
+    } @else {
+      <p class="text-center">No hay proyectos para mostrar</p>
+    }
+    
+    } 
+    @if (isCreateProject) {
+    <app-new-project
+      (closeForm)="closeForm()"
+      (newProject)="saveProject($event)"
+    ></app-new-project>
+    } 
+    @if (isViewTasks) {
+    <app-tasks [project]="project" (closeTasks)="closeTasksview()"></app-tasks>
+  } 
+}

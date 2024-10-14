@@ -1,0 +1,34 @@
+<div class="h-100 d-flex justify-content-center align-items-center">
+  <div class="login-card card m-3 p-5">
+    <!-- Card header -->
+    <div class="text-center">
+      <img class="mb-5" src="../../assets/LogoWeb.png" alt="Innclod" />
+      <h1>Iniciar sesión</h1>
+    </div>
+
+    <!-- Login form -->
+    <form [formGroup]="loginFormGroup" autocomplete="off">
+
+      <!-- Username input -->
+      <app-input label="Usuario" type="text" icon="account_circle" (onChange)="updateInputs('username', $event)"></app-input>
+
+      <!-- Password input -->
+      <app-input label="Contraseña" type="password" icon="vpn_key" (onChange)="updateInputs('password', $event)"></app-input>
+
+      <!-- Login error message -->
+      @if (loginError) {
+      <app-alert-message
+        color="alert-danger"
+        [message]="loginError"
+      ></app-alert-message>
+      }
+
+      <!-- Login button -->
+      <app-button
+        [label]="getButtonLabel()"
+        [isLoading]="isLoading"
+        (onClick)="login()"
+      ></app-button>
+    </form>
+  </div>
+</div>

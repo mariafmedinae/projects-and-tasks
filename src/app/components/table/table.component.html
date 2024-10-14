@@ -1,0 +1,34 @@
+<div class="table-container mat-elevation-z8">
+  <mat-table class="text-nowrap" [dataSource]="data" matSort>
+    @for (column of displayedColumns; track $index) {
+        <ng-container [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{ displayedColumnsNames[column] }}
+            </mat-header-cell>
+            @if(column === 'delete') {
+                <!-- Delete column -->
+                <mat-cell *matCellDef="let element">
+                    <app-basic-button icon="delete"
+                    (click)=" buttonClick('delete', element); $event.stopPropagation()">                        
+                    </app-basic-button>
+                </mat-cell>
+            }
+            @else if(column === 'view') {
+                <!-- View tasks column -->
+                <mat-cell *matCellDef="let element">
+                    <app-basic-button icon="task"
+                    (click)=" buttonClick('view', element); $event.stopPropagation()">                        
+                    </app-basic-button>
+                </mat-cell>
+            }
+            @else {
+                <!-- Generics columns -->
+                <mat-cell *matCellDef="let element">{{ element[column] }}</mat-cell>
+            }           
+        </ng-container>
+    }
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
