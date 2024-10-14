@@ -12,3 +12,7 @@ En la ruta de carpetas del proyecto `scr/app/services` hay un archivo llamado `e
 -Al eliminar un proyecto o una tarea: Sale error si se tratan de eliminar los items con id igual a 3.
 
 -Al crear un proyecto o una tarea: Si los campos Nombre del proyecto o Tarea se digita un @ va a salir error
+
+-Son necesarias las siguientes credenciales para acceder al dashboard:
+    `Usuario: innclod`
+    `Contraseña: innclod2024`
